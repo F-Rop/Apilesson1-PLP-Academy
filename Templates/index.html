@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=h, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Frank Rop Django API PLP Academy</h1>
+
+  <h2>Random Quotes from Kanye West</h2>
+
+  <p>{{ result }}</p>
+
+  <button id="generate-quote">Generate Kanye Quote</button>
+
+  <script>
+    document.getElementById("generate-quote").addEventListener("click", function() {
+      fetch('https://api.kanye.rest/')
+        .then(response => response.json())
+        .then(data => {
+          document.querySelector('p').textContent = data.quote;
+        })
+        .catch(error => console.error('Error fetching quote:', error));
+    });
+  </script>
+
+  <h2>Random photos of a Fox</h2>
+
+  <img id="fox-image" src="{{ result2 }}" alt="Random Fox Photo">
+  <button id="generate-fox">Generate Fox Photo</button>
+
+  <script>
+    document.getElementById("generate-fox").addEventListener("click", function() {
+      fetch('https://randomfox.ca/floof/')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('fox-image').src = data.image;
+        })
+        .catch(error => console.error('Error fetching fox photo:', error));
+    });
+  </script>
+</body>
+</html>
